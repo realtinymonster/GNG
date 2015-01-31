@@ -1,2 +1,2 @@
 @ECHO OFF
-start "" "%PROGRAMFILES%\LOVE\love" .
+start "" "C:\Program Files\LOVE\love" .

@@ -1,13 +1,17 @@
 function love.load()
     
-    require("tween")
+    require "tween"
     
     bgColor=127
     hx = 0
     hy = 0
     jump = 0
 
-    debugVar=1
+    debugVar=0
+    
+    --motionTween = tween.new(10, hx, 32)
+    --motionTween:update(dt)
+    --hx = 0
 
     --ignore this part
     blocks={}
@@ -65,6 +69,8 @@ function love.load()
 	blockGranite = love.graphics.newImage("textures/granite.png")
 	
     player = love.graphics.newImage("textures/player.png")
+    px = 32 / 2
+    py = 64 / 2
     
     w2 = love.graphics.getWidth() / 2   -- half the window width
     h2 = love.graphics.getHeight() / 2   -- half the window height
@@ -98,7 +104,7 @@ function createBlock(texture, x, y)
     --        return false
     --    end
     --end
-    love.graphics.draw( texture, ((32*x)-32+hx), ((32*y)-32+hy), 0, 1,1, 0, 0 )
+    love.graphics.draw( texture, ((32*x)-32+hx), ((32*y)-32+hy), 0, 1,1, 0, 0 ) --,
     --love.graphics.draw( texture, (32*x)-(mx-(32*7)), (32*y)-(my-(32*9)), 0, 1, 1, 0, 0 )
     
     --if debugVar==1 then
@@ -162,33 +168,59 @@ function love.focus(bool)
 end
 
 function love.keypressed( key, unicode )
+    screenshot = love.graphics.newScreenshot( )
+    --imageData = love.image.newImageData( screenshot )
+    print(w2, h2-32+jump)
+    r, g, b, a = screenshot:getPixel(w2, h2-32+jump)
+    
     if debugVar==1 then
         print(key)
     end
     if key == "left" then
-        for p=1,32 do
-            love.update(dt)
-            hx = hx + 1
-        end--hx = hx + 32
+        if r == bgColor then
+            if g == bgColor then
+                if b == bgColor then
+                    for p=1,32 do
+                        hx = hx + 1
+                    end --hx = hx + 32
+                 end
+            end
+        end
     end
     if key == "right" then
-        for p=1,32 do
-            love.update(dt)
-            hx = hx + -1
-        end--hx = hx + -32
+        if r == bgColor then
+            if g == bgColor then
+                if b == bgColor then
+                    for p=1,32 do
+                        hx = hx + -1
+                    end --hx = hx + -32
+                 end
+            end
+        end
     end
     if key == "up" then
-        for p=1,32 do
-            love.update(dt)
-            jump = jump + -1
-        end--jump = jump + -32
+        if r == bgColor then
+            if g == bgColor then
+                if b == bgColor then
+                    for p=1,32 do
+                        jump = jump + -32
+                    end --jump = jump + -32
+                 end
+            end
+        end
     end
     if key == "down" then
-        for p=1,32 do
-            love.update(dt)
-            jump = jump + 1
-        end--jump = jump + 32
+        if r == bgColor then
+            if g == bgColor then
+                if b == bgColor then
+                    for p=1,32 do
+                        jump = jump + 32
+                    end --jump = jump + 32
+                 end
+            end
+        end
     end
+    
 end
 
 function love.keyreleased( key, unicode )
